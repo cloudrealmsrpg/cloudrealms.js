@@ -2,9 +2,10 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import buble from 'rollup-plugin-buble';
 import multiEntry from 'rollup-plugin-multi-entry';
+import babel from '@rollup/plugin-babel';
 import pkg from './package.json';
 
-const { version, author, name, main, license, description } = pkg;
+const { version, author, name, main, license, description, module } = pkg;
 
 const banner = `\
 /**
@@ -22,27 +23,41 @@ export default [
         input: 'src/index.js',
         output: {
             file: main,
-            name: 'lib',
+            name,
             sourcemap: true,
             format: 'umd',
             banner,
         },
         plugins: [
-            resolve(), // so Rollup can find external libs
-            commonjs(), // so Rollup can convert commonJS to an ES module
+            resolve({
+                module: false,
+                browser: true,
+            }),
+            commonjs({ include: 'node_modules/**' }),
+            babel({
+                babelHelpers: 'runtime',
+                exclude: 'node_modules/**',
+            }),
             buble(),
         ],
     },
     {
         input: 'src/index.js',
         output: {
-            file: pkg.module,
-            name: 'lib',
+            file: module,
+            name,
             sourcemap: true,
             format: 'esm',
             banner,
         },
-        plugins: [resolve(), commonjs()],
+        plugins: [
+            resolve({
+                module: false,
+                browser: true,
+            }),
+            commonjs({ include: 'node_modules/**' }),
+            babel({ babelHelpers: 'runtime', exclude: 'node_modules/**' }),
+        ],
     },
     {
         input: 'tests/**/*.test.js',
@@ -59,6 +74,15 @@ export default [
             },
         },
         external: ['chai', 'it', 'describe'],
-        plugins: [resolve(), commonjs(), multiEntry(), buble()],
+        plugins: [
+            resolve({
+                module: false,
+                browser: true,
+            }),
+            commonjs({ include: 'node_modules/**' }),
+            babel({ babelHelpers: 'runtime', exclude: 'node_modules/**' }),
+            multiEntry(),
+            buble(),
+        ],
     },
 ];
