@@ -1,5 +1,6 @@
-import { assert } from 'chai';
-import { RealmObject } from '../src/framework/index';
+/* eslint-disable no-unused-expressions */
+import { assert, expect } from 'chai';
+import RealmObject from '../src/framework/realm-object';
 
 describe('RealmObject', () => {
     describe('#get', () => {
@@ -71,6 +72,32 @@ describe('RealmObject', () => {
             const newApplePrice = shop.set('items.0.price', 100);
             assert.equal(newApplePrice, 100);
             assert.equal(shop.items[0].price, 100);
+        });
+    });
+    describe('#create', () => {
+        it('should create an instance of a RealmObject', () => {
+            const realmObject = RealmObject.create({
+                name: 'Fruit Shop',
+                items: [
+                    { name: 'Apple', price: 240 },
+                    { name: 'Orange', price: 300 },
+                    { name: 'Melon', price: 500 },
+                ],
+                fruits: ['Apple', 'Orange', 'Melon', 'Lemon', 'Grape'],
+            });
+            expect(realmObject).to.be.an.instanceof(RealmObject);
+        });
+    });
+    describe('#on', () => {
+        it('should be eventful and listen for dispatched events', () => {
+            const realmObject = new RealmObject({ testing: 'Is Fun!' });
+            expect(typeof realmObject.on).to.equal('function');
+        });
+    });
+    describe('#dispatchEvent', () => {
+        it('should be eventful and be able to dispatch events', () => {
+            const realmObject = new RealmObject({ testing: 'Is Fun!' });
+            expect(typeof realmObject.dispatchEvent).to.equal('function');
         });
     });
 });
