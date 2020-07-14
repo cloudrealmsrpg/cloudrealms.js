@@ -1,6 +1,6 @@
 import Map from './map';
-import { setProperties, getProperties } from '../framework/object';
-import { uuid } from '../framework/utils/uuid';
+import { setProperties, getProperties } from '../framework/object/index';
+import uuid from '../framework/utils/uuid';
 
 class MapManager {
     maps = [];

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 import { assert, expect } from 'chai';
-import RealmObject from '../src/framework/realm-object';
+import RealmObject from '../src/framework/object';
 
 describe('RealmObject', () => {
     describe('#get', () => {

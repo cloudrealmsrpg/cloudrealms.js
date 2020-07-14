@@ -1,8 +1,8 @@
 import CloudRealms from './cloudrealms';
 
-class Game extends CloudRealms {
+class Game {
     constructor(options = {}) {
-        super(...arguments);
+        // super(...arguments);
     }
 }
 

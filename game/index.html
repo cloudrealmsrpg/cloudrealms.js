@@ -17,6 +17,9 @@
     <body></body>
     <script src="../dist/cloudrealms.js" type="text/javascript"></script>
     <script>
-        console.log(CloudRealms);
+        const game = new CloudRealms({ title: 'Testing' });
+        game.mapManager.addMap();
+        game.mapManager.render();
+        console.log(game);
     </script>
 </html>

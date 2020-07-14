@@ -1,4 +1,4 @@
-import RealmObject from '../realm-object';
+import RealmObject from '../object';
 import get from './get';
 import set from './set';
 import setProperties from './set-properties';

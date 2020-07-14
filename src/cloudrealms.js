@@ -1,9 +1,13 @@
 import Engine from './engine';
-import RealmObject from './framework/realm-object';
+import Game from './game';
 
-class CloudRealms extends RealmObject.extend(Engine) {
+class CloudRealms extends Engine {
     constructor(options = {}) {
         super(...arguments);
+    }
+
+    static newGame(options = {}) {
+        return new Game(options);
     }
 }
 

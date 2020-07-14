@@ -1,4 +1,4 @@
-import RealmObject from '../framework/realm-object';
+import RealmObject from '../framework/object';
 
 class Tile extends RealmObject {
     constructor(options = {}) {
@@ -14,7 +14,7 @@ class Tile extends RealmObject {
      * @void
      */
     render(x, y) {
-        this.ctx.fillRect(x * this.tileSize, y * this.tileSize, this.tileSize, this.tileSize);
+        this.ctx.fillRect(x * this.width, y * this.height, this.width, this.height);
     }
 }
 

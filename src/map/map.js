@@ -1,10 +1,13 @@
-import RealmObject, { getProperties } from '../frameworkobject';
+import RealmObject from '../framework/object';
+import UI from '../framework/ui';
 import Tile from './tile';
 import { range } from '../framework/array';
 
 class Map extends RealmObject {
     constructor(options = {}) {
         super(...arguments);
+        this.width = UI.getViewportWidth() || options.width;
+        this.height = UI.getViewportHeight() || options.height;
     }
 
     /**
@@ -68,8 +71,9 @@ class Map extends RealmObject {
             const yAxis = this.matrix[x];
             for (let y = 0; y < yAxis.length; y++) {
                 if (this.matrix[x][y] !== 0) {
-                    const { width, height } = getProperties(this.defaultTileSize, 'width', 'height');
+                    const { width, height } = this.defaultTileSize;
                     const tile = new Tile({
+                        ctx: this.ctx,
                         width,
                         height,
                         x,

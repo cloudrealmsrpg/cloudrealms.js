@@ -1,4 +1,4 @@
-import RealmObject from '../framework/realm-object';
+import RealmObject from '../framework/object';
 
 class Zodiac extends RealmObject {
     constructor(options = {}) {

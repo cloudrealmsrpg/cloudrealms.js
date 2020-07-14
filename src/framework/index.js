@@ -1,3 +1,3 @@
-import RealmObject from './RealmObject';
+import RealmObject from './object';
 
 export { RealmObject };

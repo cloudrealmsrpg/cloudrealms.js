@@ -1,4 +1,4 @@
-import RealmObject, { action } from '../framework/realm-object';
+import RealmObject, { action } from '../framework/object';
 
 class Character extends RealmObject {
     constructor(options = {}) {

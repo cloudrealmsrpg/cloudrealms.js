@@ -1,4 +1,5 @@
-import RealmObject from './framework/realm-object';
+import RealmObject from './framework/object';
+import UI from './framework/ui';
 
 class Engine extends RealmObject {
     /**
@@ -10,6 +11,12 @@ class Engine extends RealmObject {
      * @var {String} rootElement
      */
     rootElement = 'body';
+
+    constructor(options = {}) {
+        super(...arguments);
+        // initialize canvas on rootElement
+        this.mapManager = UI.initializeMapManager(this.rootElement);
+    }
 
     eventDispatcher = null;
 
