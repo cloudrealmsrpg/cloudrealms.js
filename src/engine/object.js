@@ -29,21 +29,17 @@ class RealmObject {
                 this[attributeKeys[index]] = attributes[attributeKeys[index]];
             }
         }
-        this.autoRender();
     }
 
     /**
-     * Renders the object if renderable, and returns true if it has rendered or should render
+     * Sets the current canvas context for this character
      *
-     * @return {Boolean} if the object has been "auto rendered"
+     * @param {CanvasRenderingContext2D} ctx
+     * @return {RealmObject}
      */
-    autoRender() {
-        // RealmObject can render()
-        if (this.hasOwnProperty('render') && this.hasOwnProperty('renderOnCreation') && this.renderOnCreation === true) {
-            this.render();
-            return true;
-        }
-        return false;
+    setContext(ctx) {
+        this.set('ctx', ctx);
+        return this;
     }
 
     /**

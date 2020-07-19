@@ -1,15 +1,15 @@
 import Engine from './engine';
 import Game from './game';
+import Character from './character/index';
+import Map from './map/index';
+import Tile from './map/tile';
 
-class CloudRealms extends Engine {
-    constructor(options = {}) {
-        super(...arguments);
-    }
+class CloudRealms extends Engine {}
 
-    static newGame(options = {}) {
-        return new Game(options);
-    }
-}
+CloudRealms.Map = Map;
+CloudRealms.Map.Tile = Tile;
+CloudRealms.Game = Game;
+CloudRealms.Character = Character;
 
 window.CloudRealms = CloudRealms;
 

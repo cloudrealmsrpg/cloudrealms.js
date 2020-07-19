@@ -1,5 +1,6 @@
-import RealmObject from './framework/object';
-import UI from './framework/ui';
+import RealmObject from './engine/object';
+import MapManager from './map/manager';
+import UI from './engine/ui';
 
 class Engine extends RealmObject {
     /**
@@ -14,8 +15,39 @@ class Engine extends RealmObject {
 
     constructor(options = {}) {
         super(...arguments);
+        // set rootElement
+        this.rootElement = options.rootElement || this.rootElement;
         // initialize canvas on rootElement
-        this.mapManager = UI.initializeMapManager(this.rootElement);
+        this.mapManager = this.initializeMapManager(this.rootElement);
+    }
+
+    /**
+     * Initializes a CloudRealms MapManager instance, to manage map layers
+     *
+     * @param {Mixed} rootElement DOM Element or DOM selector fo the root element
+     */
+    initializeMapManager(rootElement = null) {
+        const canvas = UI.createElement('canvas', {
+            id: 'cloudrealms',
+            style: {
+                width: '100vw',
+                height: '100vh',
+            },
+        });
+        const ctx = canvas.getContext('2d');
+        const root = UI.getElement(rootElement || this.rootElement);
+        root.appendChild(canvas);
+        this.rootElement = root;
+        return new MapManager(canvas, ctx);
+    }
+
+    /**
+     * Run the game
+     *
+     * @void
+     */
+    run() {
+        this.mapManager.render();
     }
 
     eventDispatcher = null;

@@ -11,7 +11,7 @@
     },
     "rules": {
         "semi": [2, "always"],
-        "indent": ["error", 4, { "outerIIFEBody": 0 }],
+        "indent": ["error", 4, { "outerIIFEBody": 0, "SwitchCase": 1 }],
         "one-var": 0,
         "no-var": 2,
         "prefer-const": 2,

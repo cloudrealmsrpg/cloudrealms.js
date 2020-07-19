@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import set from '../src/framework/object/set';
+import set from '../src/engine/object/set';
 
 describe('set', () => {
     it('should set the value at the path of an array, and return the value set', () => {

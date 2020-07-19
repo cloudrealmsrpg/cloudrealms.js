@@ -1,4 +1,4 @@
-import RealmObject from '../framework/object';
+import RealmObject from '../engine/object';
 
 class Service extends RealmObject {}
 

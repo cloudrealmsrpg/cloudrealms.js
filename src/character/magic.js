@@ -1,4 +1,4 @@
-import RealmObject from '../framework/object';
+import RealmObject from '../engine/object';
 
 class Magic extends RealmObject {
     constructor(options = {}) {

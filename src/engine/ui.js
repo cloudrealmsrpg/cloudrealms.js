@@ -1,22 +1,6 @@
-import MapManager from '../map/manager';
 import { setProperties } from './object/index';
 
 class UI {
-    static initializeMapManager(rootElement) {
-        const canvas = this.createElement('canvas', {
-            id: 'cloudrealms',
-            style: {
-                width: '100vw',
-                height: '100vh',
-            },
-        });
-        const ctx = canvas.getContext('2d');
-        const root = this.getElement(rootElement);
-        root.appendChild(canvas);
-        this.rootElement = root;
-        return new MapManager(canvas, ctx);
-    }
-
     static getViewportWidth() {
         return Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
     }

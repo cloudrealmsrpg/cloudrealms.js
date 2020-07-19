@@ -1,6 +1,7 @@
 import Map from './map';
-import { setProperties, getProperties } from '../framework/object/index';
-import uuid from '../framework/utils/uuid';
+import UI from '../engine/ui';
+import { getProperties } from '../engine/object';
+import { uuid } from '../engine/utils/index';
 
 class MapManager {
     maps = [];
@@ -20,9 +21,17 @@ class MapManager {
             });
         }
 
-        map = setProperties(map, {
+        // set default map properties
+        map.setProperties({
             id: uuid(),
             show: true,
+            canvas,
+            ctx,
+        });
+
+        // set context on all agents of the map
+        map.characters.forEach((character) => {
+            character.setContext(map.ctx);
         });
 
         if (this.getMap(map.id) !== false) {

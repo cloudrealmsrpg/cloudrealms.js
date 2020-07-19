@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import get from '../src/framework/object/get';
+import get from '../src/engine/object/get';
 
 describe('get', () => {
     it('should return the value at the path of an array', () => {

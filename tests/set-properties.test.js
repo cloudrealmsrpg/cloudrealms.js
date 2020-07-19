@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import setProperties from '../src/framework/object/set-properties';
+import setProperties from '../src/engine/object/set-properties';
 
 describe('setProperties', () => {
     it('should mass set properties to an object', () => {
