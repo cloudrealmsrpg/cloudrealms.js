@@ -9,9 +9,15 @@ class SpriteSheet extends RealmObject {
         // set dimensions of spritesheet
         this.width = options.width || null;
         this.height = options.height || null;
+        // set sprite sheet vertical frames
+        this.verticalFrames = options.verticalFrames || this.calculateVerticalFrames();
+        this.horizontalFrames = options.horizontalFrames || this.calculateHorizontalFrames();
         // calculate sprite width
-        this.spriteWidth = options.spriteWidth || null;
-        this.spriteHeight = options.spriteHeight || null;
+        this.spriteWidth = options.spriteWidth || this.calculateSpriteWidth();
+        this.spriteHeight = options.spriteHeight || this.calculateSpriteHeight();
+        // set the current frame
+        this.currentHorizontalFrame = options.currentHorizontalFrame || 0;
+        this.currentVerticalFrame = options.currentVerticalFrame || 0;
         // load sprite image
         this.load();
     }
@@ -23,20 +29,24 @@ class SpriteSheet extends RealmObject {
      */
     isLoaded = false;
 
-    /**
-     * Calcualtes default spritesheet values, useful for after the image element is loaded
-     *
-     */
-    calculateDefaults(element = null) {
-        element = element || this.element;
-        const results = {
-            width: element.width,
-            height: element.height,
-            spriteWidth: this.spriteWidth || Math.sqrt(element.width),
-            spriteHeight: this.spriteHeight || Math.sqrt(element.height),
-        };
-        this.setProperties(results);
-        return results;
+    calculateVerticalFrames() {
+        return Math.sqrt(this.height);
+    }
+
+    calculateHorizontalFrames() {
+        return Math.sqrt(this.width);
+    }
+
+    calculateSpriteWidth() {
+        return this.width / this.horizontalFrames;
+    }
+
+    calculateSpriteHeight() {
+        return this.height / this.verticalFrames;
+    }
+
+    autoAdjust(element = null) {
+        // todo recaulcate default variables based on element actual height and width
     }
 
     /**
@@ -48,7 +58,6 @@ class SpriteSheet extends RealmObject {
             this.isLoaded = true;
         };
         this.element.src = this.src;
-        this.calculateDefaults(this.element);
     }
 }
 
